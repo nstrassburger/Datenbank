@@ -1,211 +1,324 @@
 <!DOCTYPE html>
 <html lang="en">
 
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
-        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-    <title>Convert excel to JSON Object</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.2/xlsx.full.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.js"
-        integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="styles.css">
+    <title>table_test_bd</title>
 </head>
 
-<style>
-    table {
-        font-family: sans-serif;
-        border-collapse: collapse;
-        width: 100%;
-    }
-
-    td,
-    th {
-        border: 1px solid #cccccc;
-        padding: 8px;
-    }
-
-    th {
-        font-weight: bold;
-    }
-
-    tr:hover {
-        color: white
-    }
-</style>
-
 <body>
-    <div class="conatiner">
-        <div class="row">
-            <div class="col-md-3"></div>
-            <div class="col-md-3">
-                <input class="form-control border-dark" type="file" id="input" accept=".xls,.xlsx">
-
-            </div>
-            <div class="col-md-2">
-                <button class="btn btn-white border-dark" id="button">Einbinden</button>
-            </div>
-            <div class="col-md-3">
-            </div>
-        </div>
-    </div>
-    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="collapsibleNavbar">
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" id="ID1" href="#">Detaillierte Ansicht</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" id="ID2" href="#">Kompakte Ansicht</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" id="ID3" href="#">Filter Ingelheim</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" id="ID4" href="#">Filter Kirn</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" id="ID5" href="#">Filter Sobernheim</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" id="ID6" href="#">Filter Mainz</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" id="ID7" href="#">Filter HAL</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" id="ID8" href="#">Filter KYR</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" id="ID9" href="#">Filter EMA</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" id="ID10" href="#">Filter KAP</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" id="ID11" href="#">Filter SMG</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" id="ID12" href="#">Filter IGS</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link float-right" id="ID13" href="#">Speichern</a>
-                </li>
-            </ul>
-            <form class="form-inline">
-                <input class="form-control " type="search" placeholder="Filtern" aria-label="Search">
-                <button class="btn float-right btn-light" type="submit">Filtern</button>
-            </form>
-        </div>
-    </nav>
     <table class="table table-striped">
         <thead class="thead-dark">
             <tr>
-                <th data-column="MINTplus_Nummer" data-order="desc">MINTplus_Nummer</th>
-                <th data-column="Stadt" data-order="desc">Stadt</th>
-                <th data-column="Schule" data-order="desc">Schule</th>
-                <th data-column="Set" data-order="desc">Set</th>
-                <th data-column="Kategorie" data-order="desc">Kategorie</th>
-                <th data-column="Produkt" data-order="desc">Produkt</th>
-                <th data-column="Koffer" data-order="desc">Koffer</th>
-                <th data-column="Exemplar" data-order="desc">Exemplar</th>
-                <th data-column="Schrank" data-order="desc">Schrank</th>
-                <th data-column="Verliehen_seit" data-order="desc">Verliehen_seit</th>
-                <th data-column="Verliehen_bis" data-order="desc">Verliehen_bis</th>
-                <th data-column="Verliehen_an" data-order="desc">Verliehen_an</th>
-                <th data-column="IV_Nummer" data-order="desc">IV_Nummer</th>
-                <th data-column="EG_Nummer" data-order="desc">EG_Nummer</th>
-                <th data-column="Lego_Nummer" data-order="desc">Lego_Nummer</th>
-                <th data-column="Lagerort" data-order="desc">Lagerort</th>
-                <th data-column="Letzte_Kontrolle" data-order="desc">Letzte_Kontrolle</th>
-                <th data-column="Letzte_Inventur" data-order="desc">Letzte_Inventur</th>
-                <th data-column="Vollständigkeit" data-order="desc">Vollständigkeit</th>
+                <th scope="col">MINT Nummer</th>
+                <th scope="col">IV Nummer</th>
+                <th scope="col">EG Nummer</th>
+                <th scope="col">Kasten Nummer</th>
+                <th scope="col">Lego Nummer</th>
+                <th scope="col">Bezeichnung</th>
+                <th scope="col">Firmware</th>
+                <th scope="col">Lagerort</th>
+                <th scope="col">Letzte Kontrolle</th>
+                <th scope="col">Letzte Inventur</th>
+                <th scope="col">Vollständigkeit</th>
+                <th scope="col">Zusätzliche Informationen</th>
+                <th scope="col" style="width:150px">Produktbild</th>
+                <th scope="col">Sortierliste</th>
             </tr>
         </thead>
-        <tbody id="tableData"></tbody>
+        <tbody>
+            <tr>
+                <th scope="row">
+                    <div onclick="window.location.href='https://nstrassburger.github.io/information_test_bd_sd/'">MINTplus-R-L-EV3-1-1
+                    </div>
+                </th>
+                <td>IV6831</td>
+                <td>3001</td>
+                <td>1</td>
+                <td>45544</td>
+                <td>LEGO Education EV3</td>
+                <td>1.10E</td>
+                <td>Labor Ingelheim</td>
+                <td>01.05.2016</td>
+                <td>01.12.2019</td>
+                <td>WAHR</td>
+                <td>Teil XY Fehlt</td>
+                <td><img class="img-responsive" src="https://images-na.ssl-images-amazon.com/images/I/51X7eHsK5oL.jpg"
+                        width="40%"></td>
+                <td>
+                    <div onclick="window.location.href='https://seafile.rlp.net/f/4b9520574617403885cb/'">Klick
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row">
+                    <div onclick="window.location.href='https://nstrassburger.github.io/information_test_bd_sd/'">MINTplus-R-L-EV3-2-1
+                    </div>
+                </th>
+                <td>IV6832</td>
+                <td>3002</td>
+                <td>2</td>
+                <td>45544</td>
+                <td>LEGO Education EV3</td>
+                <td>1.10E</td>
+                <td>Labor Ingelheim</td>
+                <td>01.05.2016</td>
+                <td>01.12.2019</td>
+                <td>WAHR</td>
+                <td>Teil XY Fehlt</td>
+                <td><img class="img-responsive" src="https://images-na.ssl-images-amazon.com/images/I/51X7eHsK5oL.jpg"
+                        width="40%"></td>
+                <td>
+                    <div onclick="window.location.href='https://seafile.rlp.net/f/4b9520574617403885cb/'">Klick
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row">
+                    <div onclick="window.location.href='https://nstrassburger.github.io/information_test_bd_sd/'">MINTplus-R-L-EV3-3-1
+                    </div>
+                </th>
+                <td>IV6833</td>
+                <td>3003</td>
+                <td>3</td>
+                <td>45544</td>
+                <td>LEGO Education EV3</td>
+                <td>1.10E</td>
+                <td>Labor Ingelheim</td>
+                <td>01.05.2016</td>
+                <td>01.12.2019</td>
+                <td>WAHR</td>
+                <td>Teil XY Fehlt</td>
+                <td><img class="img-responsive" src="https://images-na.ssl-images-amazon.com/images/I/51X7eHsK5oL.jpg"
+                        width="40%"></td>
+                <td>
+                    <div onclick="window.location.href='https://seafile.rlp.net/f/4b9520574617403885cb/'">Klick
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row">
+                    <div onclick="window.location.href='https://nstrassburger.github.io/information_test_bd_sd/'">MINTplus-R-L-EV3-4-1
+                    </div>
+                </th>
+                <td>IV6834</td>
+                <td>3004</td>
+                <td>4</td>
+                <td>45544</td>
+                <td>LEGO Education EV3</td>
+                <td>1.10E</td>
+                <td>Labor Ingelheim</td>
+                <td>01.05.2016</td>
+                <td>01.12.2019</td>
+                <td>WAHR</td>
+                <td>Teil XY Fehlt</td>
+                <td><img class="img-responsive" src="https://images-na.ssl-images-amazon.com/images/I/51X7eHsK5oL.jpg"
+                        width="40%"></td>
+                <td>
+                    <div onclick="window.location.href='https://seafile.rlp.net/f/4b9520574617403885cb/'">Klick
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row">
+                    <div onclick="window.location.href='https://nstrassburger.github.io/information_test_bd_sd/'">MINTplus-R-L-EV3-5-1
+                    </div>
+                </th>
+                <td>IV6835</td>
+                <td>3005</td>
+                <td>5</td>
+                <td>45544</td>
+                <td>LEGO Education EV3</td>
+                <td>1.10E</td>
+                <td>Labor Ingelheim</td>
+                <td>01.05.2016</td>
+                <td>01.12.2019</td>
+                <td>WAHR</td>
+                <td>Teil XY Fehlt</td>
+                <td><img class="img-responsive" src="https://images-na.ssl-images-amazon.com/images/I/51X7eHsK5oL.jpg"
+                        width="40%"></td>
+                <td>
+                    <div onclick="window.location.href='https://seafile.rlp.net/f/4b9520574617403885cb/'">Klick
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row">
+                    <div onclick="window.location.href='https://nstrassburger.github.io/information_test_bd_sd/'">MINTplus-R-L-EV3-6-1
+                    </div>
+                </th>
+                <td>IV6836</td>
+                <td>3006</td>
+                <td>6</td>
+                <td>45544</td>
+                <td>LEGO Education EV3</td>
+                <td>1.10E</td>
+                <td>Labor Ingelheim</td>
+                <td>01.05.2016</td>
+                <td>01.12.2019</td>
+                <td>WAHR</td>
+                <td>Teil XY Fehlt</td>
+                <td><img class="img-responsive" src="https://images-na.ssl-images-amazon.com/images/I/51X7eHsK5oL.jpg"
+                        width="40%"></td>
+                <td>
+                    <div onclick="window.location.href='https://seafile.rlp.net/f/4b9520574617403885cb/'">Klick
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row">
+                    <div onclick="window.location.href='https://nstrassburger.github.io/information_test_bd_sd/'">MINTplus-R-L-EV3-7-1
+                    </div>
+                </th>
+                <td>IV6837</td>
+                <td>3007</td>
+                <td>7</td>
+                <td>45544</td>
+                <td>LEGO Education EV3</td>
+                <td>1.10E</td>
+                <td>Labor Ingelheim</td>
+                <td>01.05.2016</td>
+                <td>01.12.2019</td>
+                <td>WAHR</td>
+                <td>Teil XY Fehlt</td>
+                <td><img class="img-responsive" src="https://images-na.ssl-images-amazon.com/images/I/51X7eHsK5oL.jpg"
+                        width="40%"></td>
+                <td>
+                    <div onclick="window.location.href='https://seafile.rlp.net/f/4b9520574617403885cb/'">Klick
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row">
+                    <div onclick="window.location.href='https://nstrassburger.github.io/information_test_bd_sd/'">MINTplus-R-L-EV3-8-1
+                    </div>
+                </th>
+                <td>IV6838</td>
+                <td>3008</td>
+                <td>8</td>
+                <td>45544</td>
+                <td>LEGO Education EV3</td>
+                <td>1.10E</td>
+                <td>Labor Ingelheim</td>
+                <td>01.05.2016</td>
+                <td>01.12.2019</td>
+                <td>WAHR</td>
+                <td>Teil XY Fehlt</td>
+                <td><img class="img-responsive" src="https://images-na.ssl-images-amazon.com/images/I/51X7eHsK5oL.jpg"
+                        width="40%"></td>
+                <td>
+                    <div onclick="window.location.href='https://seafile.rlp.net/f/4b9520574617403885cb/'">Klick
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row">
+                    <div onclick="window.location.href='https://nstrassburger.github.io/information_test_bd_sd/'">MINTplus-R-L-EV3-9-1
+                    </div>
+                </th>
+                <td>IV6839</td>
+                <td>3009</td>
+                <td>9</td>
+                <td>45544</td>
+                <td>LEGO Education EV3</td>
+                <td>1.10E</td>
+                <td>Labor Ingelheim</td>
+                <td>01.05.2016</td>
+                <td>01.12.2019</td>
+                <td>WAHR</td>
+                <td>Teil XY Fehlt</td>
+                <td><img class="img-responsive" src="https://images-na.ssl-images-amazon.com/images/I/51X7eHsK5oL.jpg"
+                        width="40%"></td>
+                <td>
+                    <div onclick="window.location.href='https://seafile.rlp.net/f/4b9520574617403885cb/'">Klick
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row">
+                    <div onclick="window.location.href='https://nstrassburger.github.io/information_test_bd_sd/'">MINTplus-R-L-EV3-10-1
+                    </div>
+                </th>
+                <td>IV6840</td>
+                <td>3010</td>
+                <td>10</td>
+                <td>45544</td>
+                <td>LEGO Education EV3</td>
+                <td>1.10E</td>
+                <td>Labor Ingelheim</td>
+                <td>01.05.2016</td>
+                <td>01.12.2019</td>
+                <td>WAHR</td>
+                <td>Teil XY Fehlt</td>
+                <td><img class="img-responsive" src="https://images-na.ssl-images-amazon.com/images/I/51X7eHsK5oL.jpg"
+                        width="40%"></td>
+                <td>
+                    <div onclick="window.location.href='https://seafile.rlp.net/f/4b9520574617403885cb/'">Klick
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row">
+                    <div onclick="window.location.href='https://nstrassburger.github.io/information_test_bd_sd/'">MINTplus-R-L-EV3-11-1
+                    </div>
+                </th>
+                <td>IV6841</td>
+                <td>3011</td>
+                <td>11</td>
+                <td>45544</td>
+                <td>LEGO Education EV3</td>
+                <td>1.10E</td>
+                <td>Labor Ingelheim</td>
+                <td>01.05.2016</td>
+                <td>01.12.2019</td>
+                <td>WAHR</td>
+                <td>Teil XY Fehlt</td>
+                <td><img class="img-responsive" src="https://images-na.ssl-images-amazon.com/images/I/51X7eHsK5oL.jpg"
+                        width="40%"></td>
+                <td>
+                    <div onclick="window.location.href='https://seafile.rlp.net/f/4b9520574617403885cb/'">Klick
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row">
+                    <div onclick="window.location.href='https://nstrassburger.github.io/information_test_bd_sd/'">MINTplus-R-L-EV3-12-1
+                    </div>
+                </th>
+                <td>IV6842</td>
+                <td>3012</td>
+                <td>12</td>
+                <td>45544</td>
+                <td>LEGO Education EV3</td>
+                <td>1.10E</td>
+                <td>Labor Ingelheim</td>
+                <td>01.05.2016</td>
+                <td>01.12.2019</td>
+                <td>WAHR</td>
+                <td>Teil XY Fehlt</td>
+                <td><img class="img-responsive" src="https://images-na.ssl-images-amazon.com/images/I/51X7eHsK5oL.jpg"
+                        width="40%"></td>
+                <td>
+                    <div onclick="window.location.href='https://seafile.rlp.net/f/4b9520574617403885cb/'">Klick
+                    </div>
+                </td>
+            </tr>
+        </tbody>
     </table>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
 </body>
-<script>
 
-
-    let selected_File;
-    console.log(window.XLSX);
-    document.getElementById('input').addEventListener("change", (event) => {
-        selected_File = event.target.files[0];
-    })
-    let data = [{}]
-
-    document.getElementById('button').addEventListener("click", () => {
-        XLSX.utils.json_to_sheet(data, 'out.xlsx');
-        if (selected_File) {
-            let fileReader = new FileReader();
-            fileReader.readAsBinaryString(selected_File);
-            fileReader.onload = (event) => {
-                let data = event.target.result;
-                let workbook = XLSX.read(data, { type: "binary" });
-                console.log(workbook);
-                let worksheet = workbook.Sheets["MINTplus_Materialdatenbank"];
-                let data_json = XLSX.utils.sheet_to_json(worksheet);
-                //let new_data = data_json.map(function(record) {return record});
-                $('th').on('click', function () {
-                    var column = $(this).data('column')
-                    var order = $(this).data('order')
-                    var text = $(this).html()
-
-                    if (order == 'desc') {
-                        $(this).data('order', "asc")
-                        data_json = data_json.sort((a, b) => a[column] > b[column] ? 1 : -1)
-                    }
-                    else {
-                        $(this).data('order', "desc")
-                        data_json = data_json.sort((a, b) => a[column] < b[column] ? 1 : -1)
-                    } v
-                    $(this).html(text)
-                })
-                $(document).ready(function () {
-                    $('#tableData').DataTable({
-                        "searching": true // false to disable search (or any other option)
-                    });
-                    $('.dataTables_length').addClass('bs-select');
-                });
-                let table = document.getElementById('tableData')
-                table.innerHTML = ''
-                for (let i = 0; i < data_json.length; i++) {
-                    let row = `<tr>
-                    <td>${data_json[i].MINTplus_Nummer}</td>
-                    <td>${data_json[i].Stadt}</td>
-                    <td>${data_json[i].Schule}</td>
-                    <td>${data_json[i].Set}</td>
-                    <td>${data_json[i].Kategorie}</td>
-                    <td>${data_json[i].Produkt}</td>
-                    <td>${data_json[i].Koffer}</td>
-                    <td>${data_json[i].Exemplar}</td>
-                    <td>${data_json[i].Schrank}</td>
-                    <td>${data_json[i].Verliehen_seit}</td>
-                    <td>${data_json[i].Verliehen_bis}</td>
-                    <td>${data_json[i].Verliehen_an}</td>
-                    <td>${data_json[i].IV_Nummer}</td>
-                    <td>${data_json[i].EG_Nummer}</td>
-                    <td>${data_json[i].Lego_Nummer}</td>
-                    <td>${data_json[i].Lagerort}</td>
-                    <td>${data_json[i].Letzte_Kontrolle}</td>
-                    <td>${data_json[i].Letzte_Inventur}</td>
-                    <td>${data_json[i].Vollständigkeit}</td>
-                    </tr>`
-                    table.innerHTML += row
-                }
-                let new_workbook = XLSX.utils.book_new();
-                let new_worksheet = XLSX.utils.json_to_sheet(data_json)
-                XLSX.utils.book_append_sheet(new_workbook, new_worksheet, "MINTplus_Materialdatenbank")
-                XLSX.writeFile(new_workbook, "New_Data_File.xlsx");
-            }
-
-        }
-    }
-    );
-</script>
 </html>
